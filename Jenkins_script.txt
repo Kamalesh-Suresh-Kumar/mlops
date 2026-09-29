@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone') {
+            steps {
+                git 'https://github.com/USERNAME/REPO.git'
+            }
+        }
+
+        stage('Install') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+
+        stage('Train with MLflow') {
+            steps {
+                sh 'python train.py'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'pytest'
+            }
+        }
+
+        stage('Run Model') {
+            steps {
+                sh 'python predict.py'
+            }
+        }
+    }
+}

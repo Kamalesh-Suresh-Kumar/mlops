@@ -1,0 +1,626 @@
+MLOPS PRACTICAL - GIT AND GITHUB COMMANDS
+===============================================
+
+Based on MLOps Lab Exercise No. 1: Exploring Git Commands Through Collaborative Coding.
+
+IMPORTANT GIT WORKFLOW
+----------------------
+Working Directory
+       |
+     git add
+       |
+Staging Area
+       |
+   git commit
+       |
+Local Repository
+       |
+    git push
+       |
+GitHub
+
+To get changes from GitHub:
+GitHub -> git pull -> Local Repository
+
+
+1. BASIC GIT BASH / TERMINAL COMMANDS
+-------------------------------------
+
+pwd
+    Shows the current directory.
+
+ls
+    Lists files and directories in the current directory.
+
+clear
+    Clears the terminal window.
+
+mkdir folder
+    Creates a new directory.
+
+Example:
+mkdir mlops
+
+cd folder
+    Enters a directory.
+
+Example:
+cd mlops
+
+cd ..
+    Moves one directory back.
+
+touch file.txt
+    Creates a new file.
+
+cat file.txt
+    Displays the contents of a file.
+
+rm file.txt
+    Deletes a file.
+
+
+2. CHECK GIT INSTALLATION
+-------------------------
+
+git --version
+    Checks whether Git is installed and displays its version.
+
+
+3. CONFIGURE GIT
+----------------
+
+git config --global user.name "Your Name"
+    Sets the Git username globally.
+
+git config --global user.email "your@email.com"
+    Sets the Git email globally.
+
+git config --list
+    Displays Git configuration.
+
+git config user.name
+    Displays configured username.
+
+git config user.email
+    Displays configured email.
+
+
+4. CREATE / INITIALIZE A GIT REPOSITORY
+---------------------------------------
+
+git init
+    Initializes the current directory as a Git repository.
+
+Example:
+mkdir mlops
+cd mlops
+git init
+
+
+5. CHECK REPOSITORY STATUS
+--------------------------
+
+git status
+    Displays:
+    - untracked files
+    - modified files
+    - staged files
+    - current branch
+
+This is one of the most important commands in the practical.
+
+
+6. ADD FILES TO STAGING AREA
+----------------------------
+
+git add file.txt
+    Stages one specific file.
+
+git add .
+    Stages all changes in the current directory.
+
+Meaning:
+Working Directory -> Staging Area
+
+
+7. COMMIT CHANGES
+-----------------
+
+git commit -m "Initial commit"
+    Saves staged changes as a commit in the local repository.
+
+git commit
+    Opens the default editor to enter a commit message.
+
+git commit -am "message"
+    Stages modified and deleted tracked files and commits them.
+    NOTE: It does not include new/untracked files.
+
+git commit --amend -m "new message"
+    Modifies the most recent commit.
+
+git commit --allow-empty -m "message"
+    Creates a commit without file changes.
+
+
+8. VIEW COMMIT HISTORY
+----------------------
+
+git log
+    Displays detailed commit history.
+
+git log --oneline
+    Displays compact commit history.
+
+
+9. CREATE / CONNECT TO A GITHUB REMOTE REPOSITORY
+-------------------------------------------------
+
+First create a repository on GitHub.
+
+git remote add origin https://github.com/USERNAME/REPOSITORY.git
+    Connects the local repository to the GitHub remote repository.
+
+Here:
+origin = name of the remote repository.
+
+git remote
+    Displays remote repository names.
+
+git remote -v
+    Displays remote repository names and URLs.
+
+
+10. CHANGE BRANCH NAME TO MAIN
+------------------------------
+
+git branch -M main
+    Renames the current branch to main.
+
+
+11. PUSH CODE TO GITHUB
+-----------------------
+
+git push -u origin main
+    First push. Uploads the local main branch to GitHub and sets upstream.
+
+git push
+    Pushes local commits to the configured remote branch.
+
+git push origin main
+    Pushes the local main branch to the origin remote.
+
+
+12. CLONE AN EXISTING GITHUB REPOSITORY
+---------------------------------------
+
+git clone https://github.com/USERNAME/REPOSITORY.git
+    Downloads an existing GitHub repository to the computer.
+
+Meaning:
+GitHub Repository -> Local Repository
+
+
+13. PULL CHANGES FROM GITHUB
+----------------------------
+
+git pull
+    Fetches changes from the remote repository and integrates them.
+
+git pull origin main
+    Pulls changes from the main branch of the origin remote.
+
+Meaning:
+GitHub -> Local Repository
+
+
+14. FETCH REMOTE CHANGES
+------------------------
+
+git fetch
+    Downloads information about changes from the remote repository without
+    automatically integrating them.
+
+git fetch origin
+    Fetches updates from the origin remote.
+
+Difference:
+git fetch = download remote information
+git pull  = fetch + integrate
+
+
+15. BRANCH COMMANDS
+-------------------
+
+git branch
+    Lists local branches.
+
+git branch feature
+    Creates a new branch called feature.
+
+git checkout feature
+    Switches to the feature branch.
+
+git switch feature
+    Switches to the feature branch.
+
+git checkout -b feature
+    Creates and switches to a new branch.
+
+git switch -c feature
+    Creates and switches to a new branch.
+
+git branch --show-current
+    Displays the current branch.
+
+git branch -d feature
+    Deletes a branch normally.
+
+git branch -D feature
+    Force-deletes a branch.
+
+
+16. MERGE BRANCHES
+------------------
+
+git checkout main
+git merge feature
+    Merges the feature branch into main.
+
+Meaning:
+feature branch -> main branch
+
+
+17. VIEW DIFFERENCES
+--------------------
+
+git diff
+    Shows changes that have not been staged.
+
+git diff --staged
+    Shows changes that are already staged.
+
+
+18. RESTORE FILES
+-----------------
+
+git restore file.txt
+    Restores an unstaged file to its previous state.
+
+WARNING:
+This can discard local changes.
+
+git restore --staged file.txt
+    Removes the file from the staging area while keeping the file changes.
+
+
+19. REMOVE FILES
+----------------
+
+git rm file.txt
+    Deletes a tracked file and stages the deletion.
+
+
+20. RENAME FILES
+----------------
+
+git mv old.txt new.txt
+    Renames a tracked file and stages the change.
+
+
+21. RESET
+---------
+
+git reset file.txt
+    Unstages a file.
+
+git reset --soft HEAD~1
+    Moves HEAD back one commit while keeping changes staged.
+
+git reset --hard HEAD~1
+    Moves HEAD back one commit and discards changes.
+
+WARNING:
+git reset --hard can permanently discard changes.
+
+
+22. STASH
+---------
+
+git stash
+    Temporarily stores unfinished changes.
+
+git stash list
+    Lists saved stashes.
+
+git stash pop
+    Restores the latest stash and removes it from the stash list.
+
+
+23. TAGS
+--------
+
+git tag v1.0
+    Creates a tag named v1.0.
+
+git tag
+    Lists tags.
+
+git push origin v1.0
+    Pushes the tag to GitHub.
+
+
+24. SHOW COMMIT DETAILS
+-----------------------
+
+git show
+    Displays details of the latest commit.
+
+git show COMMIT_ID
+    Displays details of a specific commit.
+
+
+25. COMPLETE BASIC PRACTICAL - LOCAL REPOSITORY TO GITHUB
+----------------------------------------------------------
+
+mkdir mlops
+cd mlops
+
+git init
+
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+
+git status
+
+git add .
+
+git status
+
+git commit -m "Initial commit"
+
+git branch -M main
+
+git remote add origin https://github.com/USERNAME/REPOSITORY.git
+
+git push -u origin main
+
+
+26. EXISTING GITHUB REPOSITORY PRACTICAL
+----------------------------------------
+
+git clone https://github.com/USERNAME/REPOSITORY.git
+
+cd REPOSITORY
+
+git status
+
+git add .
+
+git commit -m "Updated project"
+
+git push
+
+
+27. COLLABORATIVE CODING WORKFLOW
+---------------------------------
+
+Step 1:
+git pull origin main
+
+Step 2:
+Make changes to the project.
+
+Step 3:
+git status
+
+Step 4:
+git add .
+
+Step 5:
+git commit -m "Added new feature"
+
+Step 6:
+git push origin main
+
+
+28. FEATURE BRANCH WORKFLOW
+---------------------------
+
+git pull origin main
+
+git checkout -b feature
+
+Make changes.
+
+git status
+
+git add .
+
+git commit -m "Added feature"
+
+git push -u origin feature
+
+Then merge the feature branch into main:
+
+git checkout main
+git pull origin main
+git merge feature
+git push origin main
+
+
+29. IMPORTANT GIT TERMS
+-----------------------
+
+Git
+    Distributed version control system.
+
+GitHub
+    Remote/cloud platform used to host Git repositories.
+
+Repository / Repo
+    Project files plus Git history.
+
+Local Repository
+    Git repository stored on your computer.
+
+Remote Repository
+    Repository hosted on GitHub or another Git server.
+
+Commit
+    Saved snapshot of project changes.
+
+Branch
+    Separate line of development.
+
+Main
+    Common primary branch name.
+
+Origin
+    Common name given to the remote repository.
+
+Staging Area
+    Intermediate area between working directory and commit.
+
+Clone
+    Copies an existing remote repository to the local computer.
+
+Push
+    Uploads local commits to the remote repository.
+
+Pull
+    Fetches and integrates remote changes.
+
+Fetch
+    Downloads remote information without automatically integrating it.
+
+Merge
+    Combines changes from different branches.
+
+Tag
+    Marks a particular version/commit.
+
+
+30. MOST IMPORTANT COMMANDS TO MEMORIZE
+---------------------------------------
+
+git --version
+git config --global user.name "Name"
+git config --global user.email "email"
+git init
+git status
+git add .
+git commit -m "message"
+git log --oneline
+git clone URL
+git remote add origin URL
+git remote -v
+git branch
+git checkout branch
+git merge branch
+git push -u origin main
+git push
+git pull
+git pull origin main
+git fetch
+git diff
+
+
+31. GOLDEN PRACTICAL RULE
+-------------------------
+
+When confused, first run:
+
+git status
+
+Then decide:
+
+For saving and uploading your work:
+git add .
+git commit -m "message"
+git push
+
+For getting your teammate's work:
+git pull
+
+For starting from an existing GitHub repository:
+git clone URL
+
+For creating a new local repository:
+git init
+
+
+32. QUICK COMMAND -> USE TABLE
+------------------------------
+
+git --version             -> Check Git installation
+git config                -> Configure Git
+git init                  -> Initialize repository
+git status                -> Check repository status
+git add .                 -> Stage all files
+git commit -m             -> Save snapshot
+git log                   -> View history
+git log --oneline         -> View compact history
+git clone URL             -> Download repository
+git remote add origin URL -> Connect GitHub
+git remote -v             -> Check remote URL
+git branch                -> View branches
+git branch name           -> Create branch
+git checkout name         -> Switch branch
+git switch name           -> Switch branch
+git merge name            -> Merge branch
+git push                  -> Upload commits
+git pull                  -> Download + integrate changes
+git fetch                 -> Download remote information
+git diff                  -> View changes
+git restore               -> Restore file
+git reset                 -> Reset/unstage changes
+git stash                 -> Temporarily store changes
+git tag                   -> Create/list versions
+git rm                    -> Delete tracked file
+git mv                    -> Rename tracked file
+git show                  -> Show commit details
+
+
+33. EXAM MEMORY FLOW
+--------------------
+
+NEW PROJECT:
+
+mkdir project
+cd project
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin URL
+git push -u origin main
+
+
+EXISTING PROJECT:
+
+git clone URL
+cd project
+git pull
+git add .
+git commit -m "message"
+git push
+
+
+COLLABORATION:
+
+git pull
+    ↓
+Make changes
+    ↓
+git status
+    ↓
+git add .
+    ↓
+git commit -m "message"
+    ↓
+git push
+
+
+END
